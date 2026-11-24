@@ -1,0 +1,4 @@
+# offline packages are zipped by the Pages workflow
+*/*/*.zip
+.DS_Store
+Thumbs.db
