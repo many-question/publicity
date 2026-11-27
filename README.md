@@ -9,6 +9,7 @@ Public copies of talks and other presentation materials. Each item is one folder
 | Item | Page |
 | --- | --- |
 <!-- publications:start -->
+| 2026-11-27 · AI 时代的模拟 IC 设计：现状、愿景与应对 | <https://many-question.github.io/publicity/talk/261127-ai-era-ic-design/> |
 <!-- publications:end -->
 
 The materials are built from the sources in a private repository; this one holds only the published pages.

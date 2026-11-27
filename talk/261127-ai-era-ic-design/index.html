@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="offline-package" content="261127-ai-era-ic-design.zip">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AI 时代的模拟 IC 设计：现状、愿景与应对</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="engine/theme.css">
+<link rel="stylesheet" href="engine/core.css">
+<link rel="stylesheet" href="talk.css">
+</head>
+<body>
+<main id="deck">
+
+<section class="scene statement dark" id="s0-1" data-sec="0" data-sec-title="开场" data-beat="0.1" data-title="封面">
+  <div class="cover-wrap">
+    <div class="cover-left">
+      <h1 class="say"><span class="l1">AI 时代的</span><span class="l2"><em>模拟 IC 设计</em></span></h1>
+      <div class="cover-pillars" aria-label="现状、愿景与应对">
+        <span>现状</span><i></i><span>愿景</span><i></i><span>应对</span>
+      </div>
+      <p class="cover-meta"><span>揭路</span><i></i><span data-today data-date="2026-11-27">2026 年 11 月 27 日</span></p>
+    </div>
+    <div class="cover-art" aria-hidden="true">
+      <svg class="cover-bg-svg" viewBox="0 0 540 520" fill="none">
+        <defs>
+          <radialGradient id="cv-glow" cx="55%" cy="48%" r="52%">
+            <stop offset="0%" stop-color="#E8590C" stop-opacity=".22"/>
+            <stop offset="55%" stop-color="#4A8FE7" stop-opacity=".10"/>
+            <stop offset="100%" stop-color="#141416" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="290" cy="255" r="245" fill="url(#cv-glow)"/>
+        <g stroke="#F5F4F0" stroke-opacity=".18" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M55 72 H485 M145 72 V145 M345 72 V145"/>
+          <path d="M145 145 V255 M345 145 V255 M145 255 H345 M245 255 V355"/>
+          <path d="M115 182 V222 M125 182 V222 M125 190 H145 M125 214 H145 M82 202 H115"/>
+          <path d="M375 182 V222 M365 182 V222 M365 190 H345 M365 214 H345 M375 202 H408"/>
+          <circle cx="245" cy="390" r="24"/>
+          <path d="M245 376 V404 M238 396 L245 404 L252 396 M245 414 V456 M224 456 H266 M232 465 H258 M240 474 H250"/>
+        </g>
+        <g stroke="#E8590C" stroke-opacity=".62" stroke-width="2" stroke-dasharray="5 6" stroke-linecap="round">
+          <path d="M82 202 C 130 202, 165 130, 245 130 C 325 130, 350 202, 408 202"/>
+          <path d="M245 130 V255"/>
+        </g>
+        <circle cx="82" cy="202" r="4.5" fill="#E8590C"/>
+        <circle cx="408" cy="202" r="4.5" fill="#E8590C"/>
+        <circle cx="245" cy="255" r="4.5" fill="#6AA8F8"/>
+      </svg>
+
+      <div class="art-card c-rnl">
+        <div class="art-hd"><i class="dot rnl"></i><span>RNL · 富语义网表</span></div>
+        <pre><code><span class="k">.subckt</span> fd_ota vinp vinn voutp voutn
+<span class="c">* @RNL pair M1 M2 · mirror M3 M4</span>
+<span class="i">XINP</span> stg1 vinp tail vss nfet w=100
+<span class="i">CCOMP</span> comp vout 3p</code></pre>
+      </div>
+
+      <div class="art-card c-lml">
+        <div class="art-hd"><i class="dot src"></i><span>LayoutML · 语义版图</span></div>
+        <svg viewBox="0 0 210 74" class="mini-lay">
+          <rect x="6" y="8" width="198" height="58" rx="6" fill="#0d1522" stroke="rgba(255,255,255,.12)"/>
+          <rect x="18" y="16" width="76" height="42" rx="3" fill="#2275E2" fill-opacity=".28" stroke="#6AA8F8" stroke-width="1"/>
+          <rect x="116" y="16" width="76" height="42" rx="3" fill="#2275E2" fill-opacity=".28" stroke="#6AA8F8" stroke-width="1"/>
+          <g fill="#E8590C" fill-opacity=".85">
+            <rect x="28" y="12" width="7" height="50" rx="1"/>
+            <rect x="44" y="12" width="7" height="50" rx="1"/>
+            <rect x="60" y="12" width="7" height="50" rx="1"/>
+            <rect x="76" y="12" width="7" height="50" rx="1"/>
+            <rect x="126" y="12" width="7" height="50" rx="1"/>
+            <rect x="142" y="12" width="7" height="50" rx="1"/>
+            <rect x="158" y="12" width="7" height="50" rx="1"/>
+            <rect x="174" y="12" width="7" height="50" rx="1"/>
+          </g>
+          <path d="M22 24 H188 M22 48 H188" stroke="#4ADE80" stroke-width="2.5" stroke-opacity=".8"/>
+          <g fill="#FDE047">
+            <rect x="36" y="22" width="4" height="4"/><rect x="52" y="46" width="4" height="4"/>
+            <rect x="134" y="22" width="4" height="4"/><rect x="150" y="46" width="4" height="4"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="art-card c-sim">
+        <div class="art-hd"><i class="dot ok"></i><span>Agent 闭环 · PVT 验收</span><b>PASS 11/11</b></div>
+        <svg viewBox="0 0 210 56" class="mini-wave">
+          <line x1="10" y1="46" x2="200" y2="46" stroke="rgba(255,255,255,.15)" stroke-width="1"/>
+          <line x1="10" y1="18" x2="200" y2="18" stroke="#4ADE80" stroke-opacity=".35" stroke-dasharray="3 3"/>
+          <path d="M10 46 L38 46 C48 46, 52 8, 66 13 C78 17, 84 22, 98 18 C115 17, 140 18, 200 18" fill="none" stroke="#E8590C" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M10 46 L38 46 C50 46, 56 15, 72 17 C90 19, 130 18, 200 18" fill="none" stroke="#6AA8F8" stroke-width="1.6" stroke-opacity=".7" stroke-linecap="round"/>
+        </svg>
+        <div class="art-metrics"><span>13.2 min</span><span>$6.19</span><span>PM 62°</span><span>27 PVT ✓</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s0-toc" data-sec="0" data-beat="0.2" data-title="报告目录"
+  data-heading="报告目录">
+  <div class="toc-grid">
+    <div class="toc-card" data-hot="1">
+      <div class="toc-top"><span class="toc-no">01</span></div>
+      <h3>现状</h3>
+      <p class="toc-sub">AI 做模拟电路走到哪一步了？</p>
+      <ul class="toc-pts">
+        <li>实测能力：从课程作业到电路与版图</li>
+        <li>工作机制：LLM 自主跑通仿真闭环</li>
+        <li>主流范式：Agent + 传统 EDA</li>
+      </ul>
+    </div>
+    <div class="toc-card" data-off="1">
+      <div class="toc-top"><span class="toc-no">02</span></div>
+      <h3>愿景</h3>
+      <p class="toc-sub">AI-Native 芯片设计长什么样？</p>
+      <ul class="toc-pts">
+        <li>对标软件：从 AI+工具 到 AI-Native</li>
+        <li>未来蓝图：明文源码与开放生态</li>
+        <li>课题组探索：RNL · LML · SpiceOwl · TOA</li>
+      </ul>
+    </div>
+    <div class="toc-card" data-off="1">
+      <div class="toc-top"><span class="toc-no">03</span></div>
+      <h3>应对</h3>
+      <p class="toc-sub">AI 时代 IC 专业学生该学什么、怎么学？</p>
+      <ul class="toc-pts">
+        <li>角色重构：人人都做“项目负责人”</li>
+        <li>能力升级：贬值与增值的核心技能</li>
+        <li>行动指南：怎么才算“会用 AI”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene split" id="s0-2" data-sec="1" data-sec-title="现状" data-beat="1.1" data-title="回顾高模课的大作业"
+  data-heading="回顾高模课的大作业"
+  style="--cols: minmax(0, 1.05fr) minmax(0, .95fr)">
+  <div class="col">
+    <div class="card ota-card">
+      <div class="ota-fig-wrap">
+        <svg class="dia ota-svg" viewBox="0 0 460 196" role="img" aria-label="全差分容性反馈运放（OTA）原理框图">
+          <path d="M126 30 H212 M224 30 H322 M126 30 V74 M322 30 V74" class="ln ink"/>
+          <line x1="212" y1="16" x2="212" y2="44" class="ln ink" stroke-width="2.4"/>
+          <line x1="224" y1="16" x2="224" y2="44" class="ln ink" stroke-width="2.4"/>
+          <text x="218" y="13" text-anchor="middle" class="t b" style="font-size:14px">Cf</text>
+
+          <path d="M126 166 H212 M224 166 H322 M126 166 V122 M322 166 V122" class="ln ink"/>
+          <line x1="212" y1="152" x2="212" y2="180" class="ln ink" stroke-width="2.4"/>
+          <line x1="224" y1="152" x2="224" y2="180" class="ln ink" stroke-width="2.4"/>
+          <text x="218" y="193" text-anchor="middle" class="t b" style="font-size:14px">Cf</text>
+
+          <path d="M40 74 H82 M94 74 H172" class="ln ink"/>
+          <line x1="82" y1="60" x2="82" y2="88" class="ln ink" stroke-width="2.4"/>
+          <line x1="94" y1="60" x2="94" y2="88" class="ln ink" stroke-width="2.4"/>
+          <text x="88" y="54" text-anchor="middle" class="t b" style="font-size:14px">Cs</text>
+          <text x="12" y="79" class="t b mono" style="font-size:13px">Vin+</text>
+
+          <path d="M40 122 H82 M94 122 H172" class="ln ink"/>
+          <line x1="82" y1="108" x2="82" y2="136" class="ln ink" stroke-width="2.4"/>
+          <line x1="94" y1="108" x2="94" y2="136" class="ln ink" stroke-width="2.4"/>
+          <text x="88" y="152" text-anchor="middle" class="t b" style="font-size:14px">Cs</text>
+          <text x="12" y="127" class="t b mono" style="font-size:13px">Vin-</text>
+
+          <polygon points="172,46 172,150 280,98" class="box rnl" stroke-width="2.8"/>
+          <text x="184" y="79" class="t b rnl" style="font-size:17px">+</text>
+          <text x="186" y="127" class="t b rnl" style="font-size:18px">−</text>
+          <text x="214" y="103" text-anchor="middle" class="t b rnl" style="font-size:16px">OTA</text>
+          <circle cx="256" cy="74" r="4" fill="var(--panel)" stroke="var(--rnl)" stroke-width="2"/>
+          <circle cx="256" cy="122" r="4" fill="var(--panel)" stroke="var(--rnl)" stroke-width="2"/>
+          <path d="M260 74 H396 M260 122 H396" class="ln ink"/>
+          <text x="404" y="79" class="t b mono" style="font-size:13px">Vout-</text>
+          <text x="404" y="127" class="t b mono" style="font-size:13px">Vout+</text>
+
+          <path d="M356 74 V44 M344 44 H368 M344 35 H368 M356 35 V20 M346 20 H366" class="ln ink"/>
+          <text x="378" y="45" class="t b" style="font-size:13px">CL</text>
+          <path d="M356 122 V152 M344 152 H368 M344 161 H368 M356 161 V176 M346 176 H366" class="ln ink"/>
+          <text x="378" y="160" class="t b" style="font-size:13px">CL</text>
+
+          <circle cx="126" cy="74" r="3" class="fillc ink"/>
+          <circle cx="126" cy="122" r="3" class="fillc ink"/>
+          <circle cx="322" cy="74" r="3" class="fillc ink"/>
+          <circle cx="322" cy="122" r="3" class="fillc ink"/>
+          <circle cx="356" cy="74" r="3" class="fillc ink"/>
+          <circle cx="356" cy="122" r="3" class="fillc ink"/>
+        </svg>
+      </div>
+      <div class="spec-pills">
+        <div class="spec-pill">10 ns 快速建立至 0.5%</div>
+        <div class="spec-pill">相位裕度 ≥ 60° · 摆幅 ≥ 0.5 V</div>
+        <div class="spec-pill">CMRR / PSRR ≥ 60 dB</div>
+        <div class="spec-pill">45 nm · 1.1 V · 噪声 ≤ 600 μV</div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card task-card">
+      <span class="tag src">具体需要完成的任务</span>
+      <ul class="work-list">
+        <li><b>选型手算</b><span>对比拓扑、手算初值，在 Cadence 搭完整电路与自建偏置</span></li>
+        <li><b>全套仿真</b><span>搭建开环 / 闭环 / 自归零测试台，跑遍交直流、瞬态与噪声</span></li>
+        <li><b>鲁棒验收</b><span>30 组 PVT 工艺角全覆盖 ＋ 蒙特卡洛器件失配分析</span></li>
+        <li><b>论文报告</b><span>6 页 IEEE 期刊格式报告，含全标注原理图与设计分析</span></li>
+      </ul>
+    </div>
+  </div>
+  <div class="ask-banner-wrap" data-step="1">
+    <div class="ask-banner">
+      <p class="ask-q">请大家估算一下自己需要多少时间完成？</p>
+      <p class="ask-q ask-choices">3天？ 一周？ 或是半个月？</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s1-1a" data-sec="1" data-beat="1.2" data-title="如果让 AI 来完成？"
+  data-heading="如果让 AI 来完成？">
+  <div class="ans-hero">
+    <div class="ans-lead">
+      <span class="tag rnl">实测结果 · GPT-6-Astra</span>
+      <p>同等难度任务：只需不到 <b class="hl">15 分钟</b>，花费不到 <b class="hl-src">¥50</b></p>
+    </div>
+    <div class="ans-pills">
+      <div class="ans-stat"><b>13.2 min</b><span>16 步自主迭代</span></div>
+      <div class="ans-stat src"><b>$6.19</b><span>约合 ¥45</span></div>
+      <div class="ans-stat ok"><b>11 / 11</b><span>全指标过 27 PVT</span></div>
+    </div>
+  </div>
+  <div class="ans-shots">
+    <figure class="shot">
+      <img src="assets/photos/adb-opamp-task.png" alt="Analog Design Bench 全差分两级运放任务与参考指标" data-zoom="Analog Design Bench · 全差分两级运放任务（增益 60 dB · 带宽 100 MHz · 27 组 PVT）">
+    </figure>
+    <figure class="shot">
+      <img src="assets/photos/adb-opamp-run.png" alt="GPT-6-Astra 13.2 分钟完成两级密勒运放的网表与验收记录" data-zoom="GPT-6-Astra 实测记录：16 步、13.2 分钟、$6.19、11/11 项指标过 27 组 PVT">
+    </figure>
+  </div>
+</section>
+
+<section class="scene split" id="s1-1" data-sec="1" data-beat="1.3" data-title="当前 AI 的模拟电路设计能力"
+  data-heading="当前 AI 的模拟电路设计能力"
+  data-lede="Analog Design Bench · 50 道真实电路设计题 · 独立测试台全套验收"
+  style="--cols: minmax(0, .92fr) minmax(0, 1.08fr)">
+  <div class="col">
+    <div class="stat-row">
+      <div class="stat-box">
+        <span class="num">99%</span>
+        <span class="lbl">最强模型一次做对率</span>
+      </div>
+      <div class="stat-box src">
+        <span class="num">23 min</span>
+        <span class="lbl">每题平均耗时 · 约 $3.6</span>
+      </div>
+    </div>
+    <ul class="points">
+      <li><b class="hl">低成本模型</b>：0.29 美元也能一次做对 77%</li>
+      <li><b class="hl-src">覆盖全面</b>：高模大作业难度的全差分运放只是常规题</li>
+    </ul>
+    <a class="demo-link subtle" href="https://analog-design-bench.tokenzhang.com/task/v2" target="_blank" rel="noopener">↗ 打开 50 道测试任务页</a>
+  </div>
+  <figure class="shot"><img src="assets/photos/adb-leaderboard.png" alt="Analog Design Bench V2 排行榜" data-zoom="Analog Design Bench V2 官方榜单"><figcaption>Analog Design Bench V2 排行榜</figcaption></figure>
+</section>
+
+<section class="scene" id="s1-2" data-sec="1" data-beat="1.4" data-title="语言模型（LLM）具体是如何设计电路的"
+  data-heading="语言模型（LLM）具体是如何设计电路的"
+  data-lede="以智能体（Agent）的形式完成电路设计任务">
+  <div class="agent-flow-wrap">
+    <div class="flow-4 rich">
+      <div class="step-card">
+        <div class="sc-hd"><span class="n">1</span><h3>读文件</h3></div>
+        <div class="mini-box mini-spec">
+          <div class="ms-row"><span>spec.md</span><b>指标文档</b></div>
+          <div class="ms-row"><span>opamp.sp</span><b>当前网表</b></div>
+          <div class="ms-row"><span>sim.log</span><b>仿真数据</b></div>
+        </div>
+        <p>读取文档、网表与仿真结果</p>
+      </div>
+      <span class="arr">→</span>
+      <div class="step-card" data-step="1">
+        <div class="sc-hd"><span class="n">2</span><h3>推理</h3></div>
+        <div class="mini-box mini-reason">
+          <span class="tag src">Reasoning</span>
+          <p>“PM 48° 偏低，第二级极点靠前——加大补偿电容 Cc 并调宽输出管”</p>
+        </div>
+        <p>分析电路瓶颈，规划修改方案</p>
+      </div>
+      <span class="arr" data-step="1">→</span>
+      <div class="step-card" data-step="2">
+        <div class="sc-hd"><span class="n">3</span><h3>写文件 / 命令</h3></div>
+        <div class="mini-box mini-code">
+          <code><span class="c"># 修改网表参数</span><br><span class="i">XCAS</span> vout pcas pull w=400<br><span class="i">CCOMP</span> comp vout 3p<br><span class="k">$</span> ngspice -b tb_pvt.cir</code>
+        </div>
+        <p>编辑电路源码，发出工具指令</p>
+      </div>
+      <span class="arr" data-step="2">→</span>
+      <div class="step-card" data-step="3">
+        <div class="sc-hd"><span class="n">4</span><h3>外部工具执行</h3></div>
+        <div class="mini-box mini-tool">
+          <div class="mp-hd"><span>ngspice · 27 PVT</span><b>DONE</b></div>
+          <div class="mp-row"><span>Gain</span><b>74.6 dB</b></div>
+          <div class="mp-row"><span>PM</span><b>62.0°</b></div>
+          <div class="mp-row"><span>Noise</span><b>16.3 μV</b></div>
+        </div>
+        <p>运行仿真器与检查脚本并回传</p>
+      </div>
+    </div>
+
+    <div class="loop-footer" data-step="3">
+      <svg class="loop-svg" viewBox="0 0 1120 62" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <marker id="ag-ret" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,1 L9,5 L0,9 Z" fill="var(--rnl)"/>
+          </marker>
+          <marker id="ag-ok" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+            <path d="M0,1 L9,5 L0,9 Z" fill="var(--ok)"/>
+          </marker>
+        </defs>
+        <path d="M 885 0 V 38 Q 885 48 871 48 H 134 Q 120 48 120 38 V 8" fill="none" stroke="var(--rnl)" stroke-width="2.6" marker-end="url(#ag-ret)"/>
+        <path d="M 918 0 V 35 Q 918 43 926 43 H 938" fill="none" stroke="var(--ok)" stroke-width="2.6" marker-end="url(#ag-ok)"/>
+      </svg>
+      <span class="loop-lbl">未达标 → 带新结果回到第 1 步继续循环</span>
+      <div class="exit-pill"><b>✓ 完成</b><span>提交设计结果</span></div>
+    </div>
+  </div>
+  <p class="callout center-hi" data-step="4">清晰的模块级电路设计任务正在被 AI 快速覆盖</p>
+</section>
+
+<section class="scene split" id="s1-3" data-sec="1" data-beat="1.5" data-title="AI 的模拟版图设计能力也在快速提升"
+  data-heading="AI 的模拟版图设计能力也在快速提升"
+  data-lede="Analog Layout Bench · 固定原理图，提交 GDS 独立跑通 DRC / LVS 与版图后仿"
+  style="--cols: minmax(0, 1.08fr) minmax(0, .92fr)">
+  <div class="col alb-left">
+    <figure class="shot alb-lb">
+      <img src="assets/photos/alb-leaderboard.png" alt="Analog Layout Bench 各模型主榜单对比（GPT-6 Astra / GPT-6.1 Sol / Gemini Argon / Seed / DeepSeek）" data-zoom="Analog Layout Bench 主榜单（30 题套件：25 模拟模块 + 5 数字标准单元）">
+      <figcaption>Analog Layout Bench 主榜单（Pass@1 与版图品质 Q 对比）</figcaption>
+    </figure>
+    <a class="demo-link subtle" href="https://liixtt.github.io/analog-layout-bench/" target="_blank" rel="noopener">↗ 打开 Analog Layout Bench</a>
+  </div>
+  <div class="col alb-right">
+    <div class="alb-case-hd">
+      <span class="tag src">实测案例</span>
+      <b>源极负反馈差分放大器（SKY130 · 固定原理图）</b>
+    </div>
+    <div class="alb-gds-grid">
+      <figure class="gds-tile">
+        <div class="gds-bar"><b>固定原理图</b><span class="gds-badge muted">RNL</span></div>
+        <img src="assets/photos/alb-adb04-rnl.png" alt="源极负反馈差分放大器固定 RNL 原理图" data-zoom="源极负反馈差分放大器（Source-Degenerated GM-R Differential Amplifier）固定原理图">
+      </figure>
+      <figure class="gds-tile ref">
+        <div class="gds-bar"><b>人工参考版图</b><span class="gds-badge ok">Ref · Q 0.945</span></div>
+        <img src="assets/photos/alb-adb04-ref.png" alt="人工参考 GDS 版图（Q 0.945，80×49 μm）" data-zoom="人工参考版图（Passed · Q 0.945 · 80 × 49 μm）">
+      </figure>
+      <figure class="gds-tile ai">
+        <div class="gds-bar"><b>GPT-6 Astra</b><span class="gds-badge ok">✓ Passed · Q 0.772</span></div>
+        <img src="assets/photos/alb-adb04-astra.png" alt="GPT-6 Astra 自主生成的模拟版图 GDS（Passed，Q 0.772）" data-zoom="GPT-6 Astra 实测版图（DRC/LVS/后仿全过 · Q 0.772 · 64 × 89 μm）">
+      </figure>
+      <figure class="gds-tile ai">
+        <div class="gds-bar"><b>Gemini Argon</b><span class="gds-badge ok">✓ Passed · Q 0.835</span></div>
+        <img src="assets/photos/alb-adb04-argon.png" alt="Gemini Argon 自主生成的模拟版图 GDS（Passed，Q 0.835）" data-zoom="Gemini Argon 实测版图（DRC/LVS/后仿全过 · Q 0.835 · 57 × 64 μm）">
+      </figure>
+    </div>
+  </div>
+  <div class="gap-banner-wrap" data-step="1">
+    <div class="gap-banner">
+      <p>差距仍在：器件匹配、可靠性与版图品质还有明显提升空间</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s1-4" data-sec="1" data-beat="1.6" data-title="行业与社区正在刷屏"
+  data-heading="行业与社区正在刷屏"
+  data-lede="越来越多模拟 IC 自动设计工具与真实实战案例涌现">
+  <div class="social-stage">
+    <div class="social-wall">
+      <div class="sc-stack">
+        <figure class="sc-card dark-card">
+          <img src="assets/photos/social-cadence.jpg" alt="Virtuoso 正式加上 AI：Cadence Virtuoso AI Studio IC26.1 生产版本正式开放下载" data-zoom="Cadence Virtuoso AI Studio IC26.1 生产版本正式开放下载">
+        </figure>
+        <figure class="sc-card top-crop">
+          <img src="assets/photos/social-xhs-opamp.jpg" alt="小红书实测：5 元 Token 用 DeepSeek V4.1 Flash 搭两级运放" data-zoom="AI 时代的模拟 IC 设计：5 RMB Token 跑通 MATLAB + Virtuoso Bridge 两级运放">
+        </figure>
+      </div>
+      <figure class="sc-card fit-tall">
+        <img src="assets/photos/social-jssc.jpg" alt="硅农的 1024 黑客松：12 小时纯自主复现 JSSC 10-bit SAR ADC" data-zoom="1024 黑客松：12 小时纯自主复现 JSSC Monotonic SAR ADC（交付晶体管网表与 Virtuoso OA 原理图）">
+      </figure>
+      <div class="sc-stack">
+        <figure class="sc-card top-crop">
+          <img src="assets/photos/social-xhs-thu.jpg" alt="清华园：Agent 零人工直接出现复杂网表电路那一刻，头皮发麻" data-zoom="清华园社区实测：零人工参与直接生成复杂网表电路，头皮发麻">
+        </figure>
+        <figure class="sc-card top-crop">
+          <img src="assets/photos/social-xhs-134.jpg" alt="AI 开始画模拟版图，134 器件实测，1.5 小时 0 人工干预，利用率 96%" data-zoom="SMIC 18BCD AMP 模拟版图实测：134 个器件、1.5 小时、全流程 0 人工干预、96% 面积利用率">
+        </figure>
+      </div>
+      <figure class="sc-card fit-tall">
+        <img src="assets/photos/social-xhs-ldo.jpg" alt="快让 Agent 去画 Layout：GPT-6 Astra 4-6 小时完成 2-4 天版图工作量" data-zoom="GPT-6 Astra 实测画模拟版图：LDO 4 小时，复杂版图 6 小时顶人工 2–4 天工作量">
+      </figure>
+    </div>
+
+    <div class="ribbon-layer" aria-label="关键热议词句摘录">
+      <div class="quote-ribbon t-rnl r1" data-step="1">
+        <span class="rb-tag">大厂官宣</span>
+        <span class="rb-txt">Virtuoso 正式加上<b>“AI”</b> · IC26.1 开放下载</span>
+      </div>
+      <div class="quote-ribbon t-rnl r2" data-step="1">
+        <span class="rb-tag">顶会复现</span>
+        <span class="rb-txt"><b>12 小时</b>纯自主复现 JSSC 10-bit SAR ADC</span>
+      </div>
+
+      <div class="quote-ribbon t-src r3" data-step="2">
+        <span class="rb-tag">5 元 Token</span>
+        <span class="rb-txt">“纯靠经验<b>手搓的时代</b>可能要走远了”</span>
+      </div>
+      <div class="quote-ribbon t-src r4" data-step="2">
+        <span class="rb-tag">清华园实测</span>
+        <span class="rb-txt">“零人工出复杂电路那一刻，<b>头皮发麻</b>”</span>
+      </div>
+
+      <div class="quote-ribbon t-ok r5" data-step="3">
+        <span class="rb-tag">Agent 版图</span>
+        <span class="rb-txt">“快让 Agent 画 Layout” · <b>6h 顶 2–4 天</b></span>
+      </div>
+      <div class="quote-ribbon t-ok r6" data-step="3">
+        <span class="rb-tag">134 器件</span>
+        <span class="rb-txt"><b>1.5 小时</b> · 0 人工干预 · <b>96%</b> 面积利用率</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s1-5" data-sec="1" data-beat="1.7" data-title="当前主流范式 Agent + EDA"
+  data-heading="当前主流范式 Agent + EDA"
+  data-lede="今天绝大多数 AI 模拟芯片设计方案，都在用大模型去驱动传统 EDA 工具">
+  <div class="agent-eda-flow">
+    <div class="ae-node agent">
+      <span class="tag rnl">大脑</span>
+      <b>大模型 Agent</b>
+      <span>读规格 · 规划 · 决策</span>
+    </div>
+    <span class="ae-arr">⇄</span>
+    <div class="ae-node bridge">
+      <span class="tag src">胶水层</span>
+      <b>脚本 / MCP / Bridge</b>
+      <span>SKILL · Python · CLI</span>
+    </div>
+    <span class="ae-arr">⇄</span>
+    <div class="ae-node eda">
+      <span class="tag lock">执行端</span>
+      <b>传统 EDA 工具</b>
+      <span>Virtuoso · Spectre · ngspice</span>
+    </div>
+    <span class="ae-arr">→</span>
+    <div class="ae-node out">
+      <span class="tag ok">交付物</span>
+      <b>电路与验证报告</b>
+      <span>网表 · 版图 · 仿真结果</span>
+    </div>
+  </div>
+  <div class="ae-end-q" data-step="1">这就是终极形态吗？</div>
+</section>
+
+<section class="scene" id="s2-0" data-sec="2" data-sec-title="愿景" data-beat="2.0" data-title="第二章：愿景"
+  data-heading="报告目录">
+  <div class="toc-grid">
+    <div class="toc-card done">
+      <div class="toc-top"><span class="toc-no">01</span></div>
+      <h3>现状</h3>
+      <p class="toc-sub">AI 做模拟电路走到哪一步了？</p>
+      <ul class="toc-pts">
+        <li>实测能力：从课程作业到电路与版图</li>
+        <li>工作机制：LLM 自主跑通仿真闭环</li>
+        <li>主流范式：Agent + 传统 EDA</li>
+      </ul>
+    </div>
+    <div class="toc-card active">
+      <div class="toc-top"><span class="toc-no">02</span></div>
+      <h3>愿景</h3>
+      <p class="toc-sub">AI-Native 芯片设计长什么样？</p>
+      <ul class="toc-pts">
+        <li>对标软件：从 AI+工具 到 AI-Native</li>
+        <li>未来蓝图：明文源码与开放生态</li>
+        <li>课题组探索：RNL · LML · SpiceOwl · TOA</li>
+      </ul>
+    </div>
+    <div class="toc-card dimmed">
+      <div class="toc-top"><span class="toc-no">03</span></div>
+      <h3>应对</h3>
+      <p class="toc-sub">AI 时代 IC 专业学生该学什么、怎么学？</p>
+      <ul class="toc-pts">
+        <li>角色重构：人人都做“项目负责人”</li>
+        <li>能力升级：贬值与增值的核心技能</li>
+        <li>行动指南：怎么才算“会用 AI”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s2-1" data-sec="2" data-beat="2.1" data-title="从现状走向未来"
+  data-heading="从现状走向未来">
+  <div class="stagger-board">
+    <div class="now-guide" aria-hidden="true"></div>
+
+    <div class="time-axis">
+      <span class="ta-spacer"></span>
+      <div class="ta-track">
+        <div class="ta-line"></div>
+        <div class="ta-pts">
+          <div class="ta-pt"><i></i><span>&lt; 2023</span></div>
+          <div class="ta-pt"><i></i><span>2023</span></div>
+          <div class="ta-pt now"><i></i><span>2026 · 今天</span></div>
+          <div class="ta-pt fut"><i></i><span>未来 →</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="st-row ic">
+      <div class="track-lbl">芯片</div>
+      <div class="st-lanes">
+        <div class="st-tail" aria-hidden="true"><span></span></div>
+        <div class="node col-2">
+          <b>从前手画</b>
+          <span>商业 EDA 图形界面</span>
+          <div class="logo-row">
+            <span class="tlogo cad"><svg viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#C8102E"/><path d="M11.2 5.2A3.6 3.6 0 1 0 11.2 10.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>Virtuoso</span>
+          </div>
+        </div>
+        <div class="node now col-3">
+          <b>现在 · AI + EDA</b>
+          <span>Agent 桥接调工具</span>
+          <div class="logo-row">
+            <span class="tlogo cad"><svg viewBox="0 0 16 16"><rect width="16" height="16" rx="3" fill="#C8102E"/><path d="M11.2 5.2A3.6 3.6 0 1 0 11.2 10.8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>Virtuoso</span>
+            <span class="tlogo-plus">+</span>
+            <span class="tlogo oai" title="OpenAI"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 2.5v11M3.2 5.2l9.6 5.6M12.8 5.2l-9.6 5.6" stroke="currentColor" stroke-width="1.2"/></svg></span>
+            <span class="tlogo cld" title="Claude"><svg viewBox="0 0 16 16"><path d="M8 1.5L9.4 6.2L14 5L10.3 8L14 11L9.4 9.8L8 14.5L6.6 9.8L2 11L5.7 8L2 5L6.6 6.2Z" fill="currentColor"/></svg></span>
+            <span class="tlogo gem" title="Gemini"><svg viewBox="0 0 16 16"><path d="M8 1.5C8.6 5.4 10.6 7.4 14.5 8C10.6 8.6 8.6 10.6 8 14.5C7.4 10.6 5.4 8.6 1.5 8C5.4 7.4 7.4 5.4 8 1.5Z" fill="currentColor"/></svg></span>
+          </div>
+        </div>
+        <div class="node-slot col-4">
+          <div class="node q-box" data-off="2">
+            <b>下一步会怎么样？</b>
+            <span>?</span>
+          </div>
+          <div class="node target reveal-box" data-step="2">
+            <b>AI-Native 芯片设计</b>
+            <span>Agent 直接写源码，人来审</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ref-bar" data-step="1">
+      <span>一个最有力的参考 —— <b>软件行业</b></span>
+    </div>
+
+    <div class="st-row sw" data-step="1">
+      <div class="track-lbl">软件</div>
+      <div class="st-lanes">
+        <div class="node col-1">
+          <b>从前手写</b>
+          <span>人工编写代码</span>
+          <div class="logo-row">
+            <span class="tlogo vsc"><svg viewBox="0 0 16 16"><path d="M11.5 2L14 3.2v9.6L11.5 14L4.2 8.9L2.5 10.2L1.5 9.4V6.6L2.5 5.8L4.2 7.1Z" fill="#007ACC"/></svg>VS Code</span>
+          </div>
+        </div>
+        <div class="node col-2">
+          <b>AI + IDE</b>
+          <span>IDE 辅助补全</span>
+          <div class="logo-row">
+            <span class="tlogo cur"><svg viewBox="0 0 16 16"><polygon points="8,1.5 14,5 14,11 8,14.5 2,11 2,5" fill="none" stroke="currentColor" stroke-width="1.6"/><polygon points="8,4.2 11.8,8 8,11.8 6.8,8" fill="currentColor"/></svg>Cursor</span>
+          </div>
+        </div>
+        <div class="node sw-hi col-3">
+          <b>AI-Native 编程</b>
+          <span>Agent 写，人来审</span>
+          <div class="logo-row">
+            <span class="tlogo oai"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 2.8v10.4M3.5 5.4l9 5.2M12.5 5.4l-9 5.2" stroke="currentColor" stroke-width="1.1"/></svg>Codex</span>
+            <span class="tlogo cld"><svg viewBox="0 0 16 16"><path d="M8 1.8L9.3 6.2L13.8 5L10.2 8L13.8 11L9.3 9.8L8 14.2L6.7 9.8L2.2 11L5.8 8L2.2 5L6.7 6.2Z" fill="currentColor"/></svg>Claude Code</span>
+            <span class="tlogo gem"><svg viewBox="0 0 16 16"><path d="M8 1.5C8.6 5.4 10.6 7.4 14.5 8C10.6 8.6 8.6 10.6 8 14.5C7.4 10.6 5.4 8.6 1.5 8C5.4 7.4 7.4 5.4 8 1.5Z" fill="currentColor"/></svg>Antigravity</span>
+          </div>
+        </div>
+        <div class="st-fwd col-4" aria-hidden="true"><span>持续演进 →</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s2-2" data-sec="2" data-beat="2.2" data-title="Native AI Coding vs Agent + EDA"
+  data-heading="Native AI Coding <span class='vs-hi'>vs</span> Agent + EDA">
+  <div class="cmp-grid">
+    <div class="cmp-band sw">
+      <span class="tag src">软件 · Native AI Coding（三块公开地基）</span>
+      <div class="chain">
+        <div class="pill-node">Agent</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node ok">① 明文源码</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node ok">② Git · PR · CI</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node ok">③ 开源生态</div>
+      </div>
+    </div>
+    <div class="sw-flow-card" role="img" aria-label="软件 Native AI Coding 极简直通流程">
+      <svg class="dia" viewBox="0 0 380 144">
+        <defs>
+          <marker id="sw-arr" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,1 L7,4 L0,7 Z" class="fillc ok"/>
+          </marker>
+          <marker id="sw-arr-b" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,1 L7,4 L0,7 Z" class="fillc src"/>
+          </marker>
+        </defs>
+        <rect x="10" y="20" width="96" height="54" rx="10" class="box src"/>
+        <text x="58" y="44" text-anchor="middle" class="t b src" style="font-size:14px">AI Agent</text>
+        <text x="58" y="63" text-anchor="middle" class="t s" style="font-size:11.5px">直接读写文件</text>
+
+        <line x1="106" y1="47" x2="136" y2="47" class="ln src" marker-end="url(#sw-arr-b)"/>
+
+        <rect x="140" y="20" width="102" height="54" rx="10" class="box ok"/>
+        <text x="191" y="44" text-anchor="middle" class="t b ok" style="font-size:14px">Git 明文库</text>
+        <text x="191" y="63" text-anchor="middle" class="t s" style="font-size:11.5px">diff 清晰可读</text>
+
+        <line x1="242" y1="47" x2="272" y2="47" class="ln ok" marker-end="url(#sw-arr)"/>
+
+        <rect x="276" y="20" width="94" height="54" rx="10" class="box ok"/>
+        <text x="323" y="44" text-anchor="middle" class="t b ok" style="font-size:14px">CI 自动测试</text>
+        <text x="323" y="63" text-anchor="middle" class="t s" style="font-size:11.5px">秒级并发回归</text>
+
+        <path d="M 323 74 V 104 H 58 V 78" class="ln ok dash" marker-end="url(#sw-arr)"/>
+        <rect x="130" y="92" width="122" height="24" rx="12" fill="var(--panel)"/>
+        <rect x="130" y="92" width="122" height="24" rx="12" fill="var(--ok-soft)" stroke="var(--ok)" stroke-width="1.2"/>
+        <text x="191" y="108" text-anchor="middle" class="t b ok" style="font-size:11.5px">零桥接 · 直接闭环</text>
+      </svg>
+    </div>
+
+    <div class="cmp-band eda" data-step="1">
+      <span class="tag lock">芯片现状 · Agent + 传统 EDA</span>
+      <div class="chain">
+        <div class="pill-node">Agent</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node">Bridge</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node">脚本命令</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node">Virtuoso</div>
+        <span class="ch-arr">→</span>
+        <div class="pill-node lock">二进制库</div>
+      </div>
+    </div>
+    <figure class="shot fit eda-shot" data-step="1">
+      <img src="assets/photos/vbridge-arch.png" alt="Virtuoso Bridge 架构示意" data-zoom="Virtuoso Bridge 架构">
+    </figure>
+  </div>
+  <p class="callout center-hi cmp-concl" data-step="2">软件能丝滑走通 AI-Native，靠的是三块公开地基；而芯片现在处处别扭</p>
+</section>
+
+<section class="scene" id="s2-3" data-sec="2" data-beat="2.3" data-title="卡住的不是模型"
+  data-heading="卡住的不是模型"
+  data-lede="真正的关键问题在于：数据和工具都不够 AI-Native">
+  <div class="verdicts">
+    <div class="verdict yes">
+      <span class="mark">✓</span>
+      <b>模型会设计</b>
+      <span>前端近满分，后端已破冰</span>
+    </div>
+    <div class="verdict yes">
+      <span class="mark">✓</span>
+      <b>能调旧工具</b>
+      <span>经由桥接可驱动 EDA</span>
+    </div>
+    <div class="verdict no">
+      <span class="mark">✗</span>
+      <b>数据不原生</b>
+      <span>二进制封闭，裸网表难审</span>
+    </div>
+    <div class="verdict no">
+      <span class="mark">✗</span>
+      <b>工具不原生</b>
+      <span>为人手设计，扛不住并发</span>
+    </div>
+  </div>
+  <p class="callout center-hi big-concl" data-step="1">IC 行业要真正进入 AI-Native 阶段，必须解决右边的两个问题</p>
+</section>
+
+<section class="scene split" id="s3-1" data-sec="2" data-beat="2.4" data-title="未来的电路设计蓝图"
+  data-heading="未来的电路设计蓝图"
+  data-lede="以开放、Agent 友好的数据格式为中心，重构整个生态"
+  style="--cols: minmax(0, .82fr) minmax(0, 1.18fr)">
+  <ul class="points vis-pts">
+    <li><b>核心</b>：开放且 Agent 友好的数据格式</li>
+    <li data-step="1"><b>人</b>：定需求、审查、核签</li>
+    <li data-step="2"><b>Agents</b>：直接读写源文件的主力</li>
+    <li class="concl" data-step="3">未来只需<b class="hl">查看器</b>，Agent 是统一编辑入口</li>
+    <li data-step="4"><b>EDA 工具</b>：退为仿真与验证算力服务</li>
+    <li data-step="5"><b>PDK 适配</b>：Agent 不经 EDA 直连工艺</li>
+    <li data-step="6"><b>开源生态</b>：像代码库一样发布与复用</li>
+    <li data-step="7"><b>项目管理</b>：全面接轨 Git · PR · CI</li>
+  </ul>
+  <div class="vision" role="img" aria-label="未来 AI-Native 电路设计生态蓝图">
+    <div class="vz-row vz-top">
+      <div class="vz-box vz-actor" data-step="1" data-hot="1,3">
+        <span class="av"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="13" r="7"/><path d="M6 37c1-9 7-14 14-14s13 5 14 14"/></svg></span>
+        <b>人</b><span>需求 · 审查 · 核签</span>
+      </div>
+      <div class="vz-box vz-actor" data-step="2" data-hot="2,3">
+        <span class="av agent">&gt;_</span>
+        <b>Agents</b><span>主要生产力</span>
+      </div>
+    </div>
+    <div class="vz-row vz-links">
+      <span data-step="1"><i data-step="3">查看器</i></span>
+      <span data-step="2" class="rw"><i data-step="3">编辑入口</i></span>
+    </div>
+    <div class="vz-core">开放且 Agent 友好的<br>数据格式</div>
+    <div class="vz-row vz-links three">
+      <span data-step="4"></span><span data-step="5"></span><span data-step="6"></span>
+    </div>
+    <div class="vz-row vz-bottom">
+      <div class="vz-box" data-step="4" data-hot="4"><b>EDA 工具集</b><span>仿真 · 验证</span></div>
+      <div class="vz-box" data-step="5" data-hot="5"><b>PDK 适配器</b><span>直接访问</span></div>
+      <div class="vz-box" data-step="6" data-hot="6"><b>开源设计库</b><span>发布 · 复用</span></div>
+    </div>
+    <span class="vz-pm-link" data-step="7"></span>
+    <div class="vz-pm" data-step="7" data-hot="7"><b>类软件<br>项目管理</b><span>Git · PR · CI</span></div>
+  </div>
+</section>
+
+<section class="scene split" id="s3-2" data-sec="2" data-beat="2.5" data-title="课题组的相关工作"
+  data-heading="课题组的相关工作"
+  data-lede="沿着蓝图的四个关键缺口，逐一补齐"
+  style="--cols: minmax(0, .82fr) minmax(0, 1.18fr)">
+  <div class="map-list">
+    <div class="map-item" data-hot="1">
+      <b><span class="tag rnl">前端格式</span>RNL</b>
+      <p>把原理图语义写进网表注释</p>
+    </div>
+    <div class="map-item">
+      <b><span class="tag src">后端格式</span>LayoutML</b>
+      <p>把版图变成可读源码，与工艺解耦</p>
+    </div>
+    <div class="map-item">
+      <b><span class="tag lock">仿真与 PDK</span>SpiceOwl</b>
+      <p>扛住 Agent 高并发仿真与物理诊断</p>
+    </div>
+    <div class="map-item">
+      <b><span class="tag ok">AI-Native 项目组织</span>TOA &amp; Gazettoa</b>
+      <p>可信开源电路库，转动数据飞轮</p>
+    </div>
+  </div>
+  <div class="vision vision-mapped" role="img" aria-label="课题组四块工作在蓝图中的落位">
+    <div class="vz-row vz-top">
+      <div class="vz-box vz-actor">
+        <span class="av"><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="13" r="7"/><path d="M6 37c1-9 7-14 14-14s13 5 14 14"/></svg></span>
+        <b>人</b><span>需求 · 审查 · 核签</span>
+      </div>
+      <div class="vz-box vz-actor">
+        <span class="av agent">&gt;_</span>
+        <b>Agents</b><span>主要生产力</span>
+      </div>
+    </div>
+    <div class="vz-row vz-links">
+      <span><i>查看器</i></span>
+      <span class="rw"><i>编辑入口</i></span>
+    </div>
+    <div class="vz-core">
+      <div>开放数据格式</div>
+      <div class="vz-badges">
+        <span class="vz-badge" data-hot="1">RNL</span>
+        <span class="vz-badge src">LayoutML</span>
+      </div>
+    </div>
+    <div class="vz-bridge-zone">
+      <svg class="vz-bridge-svg" viewBox="0 0 300 66" preserveAspectRatio="none" aria-hidden="true">
+        <line x1="98" y1="0" x2="98" y2="17" stroke="var(--lock)" stroke-width="2.2"/>
+        <path d="M 98 49 V 57 H 48 V 66" fill="none" stroke="var(--lock)" stroke-width="2.2"/>
+        <path d="M 98 49 V 57 H 150 V 66" fill="none" stroke="var(--lock)" stroke-width="2.2"/>
+        <line x1="252" y1="0" x2="252" y2="66" stroke="var(--ok)" stroke-width="2.2"/>
+      </svg>
+      <div class="vz-owl-pill">SpiceOwl</div>
+    </div>
+    <div class="vz-row vz-bottom">
+      <div class="vz-box">
+        <b>EDA 工具集</b><span>仿真 · 验证</span>
+      </div>
+      <div class="vz-box">
+        <b>PDK 适配器</b><span>直接访问</span>
+      </div>
+      <div class="vz-box" style="border-color:var(--ok)">
+        <b>开源设计库</b><span>发布 · 复用</span>
+        <div class="vz-badges"><span class="vz-badge ok">Gazettoa</span></div>
+      </div>
+    </div>
+    <span class="vz-pm-link"></span>
+    <div class="vz-pm">
+      <b>类软件<br>项目管理</b>
+      <span>Git · PR · CI</span>
+      <div class="vz-badges"><span class="vz-badge src">TOA</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="scene split" id="s3-3" data-sec="2" data-beat="2.6" data-title="这是什么电路？"
+  data-heading="这是什么电路？"
+  style="--cols: minmax(0, .92fr) minmax(0, 1.08fr)">
+  <div class="col">
+    <figure class="netbox">
+      <pre class="code" data-netlist="twostage" data-lines="3-13"></pre>
+    </figure>
+    <div class="conv-pills" data-step="2">
+      <div class="conv-pill"><b>左右对称</b>差分对</div>
+      <div class="conv-pill"><b>上高下低</b>电流方向</div>
+      <div class="conv-pill"><b>左进右出</b>信号流向</div>
+    </div>
+    <p class="callout center-hi" data-step="3">网表管<b class="hl-src">电气事实</b>，原理图管<b class="hl">结构语义</b></p>
+  </div>
+  <figure class="sheet" data-step="1" style="align-self: stretch">
+    <div class="fig-svg fill" data-fig="twostage" data-hl='{"2":["#M1","#M2","#M3","#M4"]}'></div>
+    <figcaption><span>同一个二级运放电路</span><span>两秒即懂</span></figcaption>
+  </figure>
+</section>
+
+<section class="scene" id="s3-4" data-sec="2" data-beat="2.7" data-title="纯网表与画图的两难"
+  data-heading="纯网表与画图的两难"
+  data-lede="裸网表人审不了，让 AI 直接画原理图又画不好">
+  <div class="s34-cols">
+    <div class="col">
+      <span class="tag lock">裸网表 · 看不懂就审不了</span>
+      <figure class="window">
+        <div class="bar">sar_adc.sp · 208 行纯网表（节选）</div>
+        <pre class="code raw-net" data-netlist="sar10" data-lines="1-20"></pre>
+      </figure>
+    </div>
+    <div class="col">
+      <span class="tag lock">AI 直接画图 · 仍不可靠</span>
+      <div class="cmps">
+        <figure class="cmp"><img src="assets/photos/arena-scint-human.svg" alt="人画的开关电容积分器" data-zoom="开关电容积分器 · 人画的"><figcaption>人画的</figcaption></figure>
+        <figure class="cmp"><img src="assets/photos/arena-scint-opus-5-5.svg" alt="Claude Opus 5.5 画的开关电容积分器" data-zoom="开关电容积分器 · Claude Opus 5.5"><figcaption>Claude Opus 5.5</figcaption></figure>
+        <figure class="cmp"><img src="assets/photos/arena-scint-gpt-6-luna.svg" alt="GPT-6 Luna 画的开关电容积分器" data-zoom="开关电容积分器 · GPT-6 Luna"><figcaption>GPT-6 Luna</figcaption></figure>
+      </div>
+    </div>
+  </div>
+  <p class="callout center-hi" data-step="1">根本原因：大模型最擅长<b>文本</b>，而不是排坐标画图</p>
+</section>
+
+<section class="scene split" id="s3-5" data-sec="2" data-beat="2.8" data-title="网表 + RNL 的破局"
+  data-heading="网表 + RNL 的破局"
+  data-lede="把语义写进网表注释，一份纯文本文件各方共用"
+  style="--cols: minmax(0, .92fr) minmax(0, 1.08fr)">
+  <div class="col">
+    <ul class="points">
+      <li><b class="hl">审意图</b>：只写语义 + 求解器排图，盲测反超人画</li>
+      <li data-step="1"><b class="hl-src">高解耦</b>：换画风、换工艺，原理图零成本保留</li>
+      <li data-step="2"><b class="hl-ok">软件化</b>：直接用 Git / PR / CI，零 GUI 跑通 SAR ADC</li>
+    </ul>
+  </div>
+  <div class="col">
+    <div class="exp-trio">
+      <figure><img src="assets/photos/exp-q53-human.svg" alt="人画的二级运放" data-zoom="盲测 · 人画的"><figcaption>人画的（+0.12）</figcaption></figure>
+      <figure><img src="assets/photos/exp-q53-coords.svg" alt="模型写坐标" data-zoom="盲测 · 模型写坐标"><figcaption>写坐标（-0.07）</figcaption></figure>
+      <figure class="win"><img src="assets/photos/exp-q53-semantic.svg" alt="模型写语义 + 求解器" data-zoom="盲测 · 写语义 + 求解器"><figcaption>写语义 + 求解器（+0.36）</figcaption></figure>
+    </div>
+    <figure class="shot adc-shot" data-step="2"><img src="assets/photos/adc-site-home.png" alt="ADC-12b-100M 项目网站首页" data-zoom="ADC-12b-100M：零 GUI 编辑器跑通 Git/PR/CI"><figcaption>12-bit 100MS/s SAR ADC · 零图形编辑器跑通</figcaption></figure>
+  </div>
+</section>
+
+<section class="scene" id="s3-6" data-sec="2" data-beat="2.9" data-title="一眼看懂 RNL 语言"
+  data-heading="一眼看懂 RNL 语言"
+  data-lede="藏在注释里、重读轻写、不写坐标也能自动出图">
+  <div class="anat vw">
+    <div class="seg"><code><span class="s-comment">*</span></code><span>注释行</span></div>
+    <div class="seg"><code><span class="s-local">%dp1</span> =</code><span>起名字</span></div>
+    <div class="seg"><code><span class="s-inst">#M1</span>(<span class="s-param">left</span>) <span class="s-inst">#M2</span>(<span class="s-param">right</span>) <span class="s-inst">#M5</span>(<span class="s-param">tail</span>)</code><span>器件与角色</span></div>
+    <div class="seg"><code><span class="s-keyword">@AS</span></code><span>看作</span></div>
+    <div class="seg"><code><span class="s-def">$DIFFERENTIAL_PAIR_N</span>;</code><span>差分对结构</span></div>
+  </div>
+  <div class="rnl-bot" data-step="1">
+    <figure class="sheet" style="height:100%">
+      <div class="fig-svg fill" data-fig="ota5t-usages"></div>
+      <figcaption><span>RNL 查看器语义框渲染</span><span>ota5t.sp</span></figcaption>
+    </figure>
+    <div class="col">
+      <ul class="points">
+        <li><b>不改电路</b>：仿真器跳过注释照常运行</li>
+        <li><b>对人友好</b>：支持中英文自由阅读，写交给 AI</li>
+        <li><b>开箱即用</b>：开源查看器、求解器与 Agent Skill</li>
+      </ul>
+      <div class="row">
+        <a class="demo-link" href="https://rich-netlist.github.io/rnl/zh/" target="_blank" rel="noopener">↗ Demo · RNL 官网</a>
+        <a class="demo-link subtle" href="https://rich-netlist.github.io/rnl/zh/language.html" target="_blank" rel="noopener">↗ 语言导览</a>
+        <a class="demo-link subtle" href="https://many-question.github.io/ADC-12b-100M" target="_blank" rel="noopener">↗ SAR ADC</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s3-7" data-sec="2" data-beat="2.10" data-title="把同样思想延伸到版图"
+  data-heading="把同样思想延伸到版图"
+  data-lede="LayoutML 像 RNL 一样文本化，实现高层结构与底层工艺（PDK）解耦">
+  <div class="lml-top">
+    <div class="bridge-bar">
+      <div class="bridge-side">
+        <span class="tag rnl">前端 · RNL</span>
+        <b>网表事实 ＋ 语义注释</b>
+      </div>
+      <span class="bridge-mid">⟷ 同构类比</span>
+      <div class="bridge-side">
+        <span class="tag src">后端 · LayoutML</span>
+        <b>精确几何 ＋ 声明式源码</b>
+      </div>
+    </div>
+    <a class="demo-link" href="https://liixtt.github.io/LayoutML/index.html" target="_blank" rel="noopener">↗ 打开 LayoutML 交互演示</a>
+  </div>
+  <figure class="shot lml-hero">
+    <img src="assets/photos/layoutml-trio.png" alt="LayoutML 首页 GDS 二进制、.lml 源码与物理版图三栏对照" data-zoom="LayoutML：GDS 二进制记录流 ↔ 61 行可读源码 ↔ 物理版图 SVG">
+  </figure>
+</section>
+
+<section class="scene split" id="s3-9" data-sec="2" data-beat="2.11" data-title="统一的仿真管理：为什么需要？"
+  data-heading="统一的仿真管理：为什么需要？"
+  data-lede="仿真验证是 Agent 的眼睛；高并发下，仿真效率会成为最大瓶颈"
+  style="--cols: minmax(0, .94fr) minmax(0, 1.06fr)">
+  <div class="col">
+    <div class="scale-cmp">
+      <div class="scale-box">
+        <span class="tag">人工时代</span>
+        <b>一次跑几个</b>
+        <span>人手工点界面、等波形</span>
+      </div>
+      <div class="scale-box lock" data-step="1">
+        <span class="tag lock">Agent 时代</span>
+        <b>并发上百上千个</b>
+        <span>仿真效率成为最大瓶颈</span>
+      </div>
+    </div>
+    <ul class="points" data-step="2">
+      <li><b class="hl-src">SpiceOwl 的角色</b>：自动筛机器、配 PDK、守长任务与分项诊断，全面扛住高并发</li>
+    </ul>
+    <a class="demo-link subtle" data-step="2" href="https://spiceowl-dev.github.io/spiceowl/workflow.html" target="_blank" rel="noopener">↗ 打开 SpiceOwl 工作流</a>
+  </div>
+  <figure class="shot dark-img"><img src="assets/photos/spiceowl-workflow.png" alt="SpiceOwl 仿真管理协作结构" data-zoom="SpiceOwl 仿真管理协作结构"><figcaption>You sleep. SpiceOwl keeps watch.</figcaption></figure>
+</section>
+
+<section class="scene split" id="s3-11" data-sec="2" data-beat="2.12" data-title="语料库与数据飞轮"
+  data-heading="语料库与数据飞轮"
+  data-lede="软件 AI 靠 GitHub 跑出飞轮，Agentic 芯片设计同样离不开开放语料"
+  style="--cols: minmax(0, .92fr) minmax(0, 1.08fr)">
+  <div class="col">
+    <ul class="points big-eco">
+      <li><b class="hl">模型的养料</b>：极度依赖带语义、带验证的高质量电路语料</li>
+      <li data-step="1"><b class="hl-src">复用的底座</b>：Agent 干活需要像调代码库一样检索复用模块</li>
+      <li data-step="2"><b class="hl-lock">今天的死结</b>：设计锁在二进制里，全行业年年重复造轮子</li>
+    </ul>
+  </div>
+  <svg class="dia" viewBox="0 0 580 460" role="img" aria-label="AI-Native IC 开放生态数据飞轮图">
+    <defs>
+      <marker id="arr-fw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0,1 L9,5 L0,9 Z" class="fillc rnl"/>
+      </marker>
+    </defs>
+    <circle cx="290" cy="230" r="68" class="box rnl"/>
+    <text x="290" y="224" text-anchor="middle" class="t b rnl" style="font-size:20px">数据飞轮</text>
+    <text x="290" y="249" text-anchor="middle" class="t s" style="font-size:14px">正反馈越转越快</text>
+
+    <rect x="175" y="16" width="230" height="74" rx="12" class="box ok"/>
+    <text x="290" y="48" text-anchor="middle" class="t b ok" style="font-size:17px">① 开放格式</text>
+    <text x="290" y="72" text-anchor="middle" class="t s" style="font-size:14px">RNL · LayoutML · TOA</text>
+
+    <rect x="374" y="190" width="194" height="80" rx="12" class="box src"/>
+    <text x="471" y="224" text-anchor="middle" class="t b src" style="font-size:17px">② 电路语料库</text>
+    <text x="471" y="248" text-anchor="middle" class="t s" style="font-size:14px">语义 + 版图 + 验证</text>
+
+    <rect x="165" y="370" width="250" height="74" rx="12" class="box rnl"/>
+    <text x="290" y="402" text-anchor="middle" class="t b rnl" style="font-size:17px">③ 更强的 AI 与 Agent</text>
+    <text x="290" y="426" text-anchor="middle" class="t s" style="font-size:14px">更懂电路 · 直接复用</text>
+
+    <rect x="12" y="190" width="194" height="80" rx="12" class="box"/>
+    <text x="109" y="224" text-anchor="middle" class="t b" style="font-size:17px">④ 更多人开源</text>
+    <text x="109" y="248" text-anchor="middle" class="t s" style="font-size:14px">论文附源码 · 共建生态</text>
+
+    <path d="M 408 58 Q 492 92 482 184" class="ln rnl" style="stroke-width:3" marker-end="url(#arr-fw)"/>
+    <path d="M 482 276 Q 486 376 422 404" class="ln rnl" style="stroke-width:3" marker-end="url(#arr-fw)"/>
+    <path d="M 160 404 Q 90 376 98 276" class="ln rnl" style="stroke-width:3" marker-end="url(#arr-fw)"/>
+    <path d="M 98 184 Q 96 92 168 58" class="ln rnl" style="stroke-width:3" marker-end="url(#arr-fw)"/>
+  </svg>
+</section>
+
+<section class="scene split" id="s3-12" data-sec="2" data-beat="2.13" data-title="TOA 与 Gazettoa"
+  data-heading="TOA 与 Gazettoa"
+  data-lede="让芯片设计像开源软件一样可信分享、可核验、可复用"
+  style="--cols: minmax(0, .92fr) minmax(0, 1.08fr)">
+  <div class="col">
+    <ul class="points">
+      <li><b class="hl-ok">TOA 标准</b>：内容哈希命名，改一字节即成新对象，天然防篡改</li>
+      <li data-step="1"><b class="hl">学术复现</b>：论文先发指标与哈希，发表后公开源码一字可核验</li>
+      <li data-step="2"><b class="hl-src">Gazettoa 门户</b>：在线浏览真实芯片库，人能看图、AI 也能直接用</li>
+    </ul>
+    <div class="row" data-step="2">
+      <a class="demo-link subtle" href="https://true-openaccess.github.io/toa" target="_blank" rel="noopener">↗ TOA 标准</a>
+      <a class="demo-link" href="https://true-openaccess.github.io/gazettoa/" target="_blank" rel="noopener">↗ Demo · 浏览芯片库</a>
+    </div>
+  </div>
+  <div class="shot-stack">
+    <figure class="shot"><img src="assets/photos/toa-home.png" alt="TOA True-OpenAccess 核心特性" data-zoom="TOA：不可变、自组织、防篡改、Agent 原生"></figure>
+    <figure class="shot" data-step="2"><img src="assets/photos/gazettoa-home.png" alt="Gazettoa 在线芯片库门户" data-zoom="Gazettoa：在线浏览真实 PLL / RISCA 芯片库"></figure>
+  </div>
+</section>
+
+<section class="scene" id="s3-0" data-sec="3" data-sec-title="应对" data-beat="3.0" data-title="第三章：应对"
+  data-heading="报告目录">
+  <div class="toc-grid">
+    <div class="toc-card done">
+      <div class="toc-top"><span class="toc-no">01</span></div>
+      <h3>现状</h3>
+      <p class="toc-sub">AI 做模拟电路走到哪一步了？</p>
+      <ul class="toc-pts">
+        <li>实测能力：从课程作业到电路与版图</li>
+        <li>工作机制：LLM 自主跑通仿真闭环</li>
+        <li>主流范式：Agent + 传统 EDA</li>
+      </ul>
+    </div>
+    <div class="toc-card done">
+      <div class="toc-top"><span class="toc-no">02</span></div>
+      <h3>愿景</h3>
+      <p class="toc-sub">AI-Native 芯片设计长什么样？</p>
+      <ul class="toc-pts">
+        <li>对标软件：从 AI+工具 到 AI-Native</li>
+        <li>未来蓝图：明文源码与开放生态</li>
+        <li>课题组探索：RNL · LML · SpiceOwl · TOA</li>
+      </ul>
+    </div>
+    <div class="toc-card active">
+      <div class="toc-top"><span class="toc-no">03</span></div>
+      <h3>应对</h3>
+      <p class="toc-sub">AI 时代 IC 专业学生该学什么、怎么学？</p>
+      <ul class="toc-pts">
+        <li>角色重构：人人都做“项目负责人”</li>
+        <li>能力升级：贬值与增值的核心技能</li>
+        <li>行动指南：怎么才算“会用 AI”</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s4-1" data-sec="3" data-beat="3.1" data-title="拼回完整的设计流程"
+  data-heading="拼回完整的设计流程">
+  <div class="flow-wrap">
+    <svg class="dia" viewBox="0 0 1120 398" preserveAspectRatio="xMidYMid meet" role="img" aria-label="AI-Native IC 完整设计流程图">
+      <defs>
+        <marker id="arr-ink" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,1 L9,5 L0,9 Z" class="fillc ink"/>
+        </marker>
+        <marker id="arr-rnl" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,1 L9,5 L0,9 Z" class="fillc rnl"/>
+        </marker>
+      </defs>
+
+      <g data-hot="1">
+        <rect x="290" y="6" width="540" height="76" rx="14" class="box rnl human-box"/>
+        <text x="560" y="39" text-anchor="middle" class="t b rnl" style="font-size:23px">人（IC 工程师）</text>
+        <text x="560" y="66" text-anchor="middle" class="t" style="font-size:16px">定需求 · 审意图 · 守底线与核签</text>
+      </g>
+
+      <g data-off="1">
+        <line x1="470" y1="82" x2="470" y2="126" class="ln rnl" marker-end="url(#arr-rnl)"/>
+        <text x="454" y="109" text-anchor="end" class="t s rnl" style="font-size:14px">需求 · 约束 · 裁决</text>
+        <line x1="650" y1="126" x2="650" y2="82" class="ln ink" marker-end="url(#arr-ink)"/>
+        <text x="666" y="109" text-anchor="start" class="t s" style="font-size:14px">查看器 · 证据报告</text>
+
+        <rect x="220" y="130" width="680" height="58" rx="12" class="box src"/>
+        <text x="560" y="166" text-anchor="middle" class="t b src" style="font-size:19px">AI Agent 团队（统一编辑与执行主力）</text>
+
+        <line x1="125" y1="226" x2="125" y2="188" class="ln dash"/>
+        <line x1="340" y1="188" x2="340" y2="226" class="ln ink" marker-end="url(#arr-ink)"/>
+        <line x1="560" y1="188" x2="560" y2="226" class="ln ink" marker-end="url(#arr-ink)"/>
+        <line x1="780" y1="188" x2="780" y2="226" class="ln ink" marker-end="url(#arr-ink)"/>
+        <line x1="995" y1="188" x2="995" y2="226" class="ln ink" marker-end="url(#arr-ink)"/>
+
+        <rect x="14" y="210" width="1092" height="180" rx="16" class="box soft ln dash"/>
+        <text x="560" y="373" text-anchor="middle" class="t s mono" style="font-size:14px">底座：Git · PR · CI 自动回归与开放工艺适配</text>
+
+        <rect x="36" y="232" width="178" height="108" rx="10" class="box ok"/>
+        <text x="125" y="274" text-anchor="middle" class="t b ok" style="font-size:17px">TOA / Gazettoa</text>
+        <text x="125" y="304" text-anchor="middle" class="t s" style="font-size:14px">① 复用模块</text>
+
+        <line x1="214" y1="286" x2="248" y2="286" class="ln ink" marker-end="url(#arr-ink)"/>
+
+        <rect x="252" y="232" width="178" height="108" rx="10" class="box rnl"/>
+        <text x="341" y="274" text-anchor="middle" class="t b rnl" style="font-size:17px">RNL</text>
+        <text x="341" y="304" text-anchor="middle" class="t s" style="font-size:14px">② 前端源码</text>
+
+        <line x1="430" y1="286" x2="464" y2="286" class="ln ink" marker-end="url(#arr-ink)"/>
+
+        <rect x="468" y="232" width="184" height="108" rx="10" class="box lock"/>
+        <text x="560" y="274" text-anchor="middle" class="t b lock" style="font-size:17px">SpiceOwl</text>
+        <text x="560" y="304" text-anchor="middle" class="t s" style="font-size:14px">③ 并发仿真诊断</text>
+
+        <line x1="652" y1="286" x2="686" y2="286" class="ln ink" marker-end="url(#arr-ink)"/>
+
+        <rect x="690" y="232" width="180" height="108" rx="10" class="box src"/>
+        <text x="780" y="274" text-anchor="middle" class="t b src" style="font-size:17px">LayoutML</text>
+        <text x="780" y="304" text-anchor="middle" class="t s" style="font-size:14px">④ 后端源码</text>
+
+        <line x1="870" y1="286" x2="904" y2="286" class="ln ink" marker-end="url(#arr-ink)"/>
+
+        <rect x="908" y="232" width="178" height="108" rx="10" class="box ok"/>
+        <text x="997" y="274" text-anchor="middle" class="t b ok" style="font-size:17px">TOA 发布</text>
+        <text x="997" y="304" text-anchor="middle" class="t s" style="font-size:14px">⑤ 沉淀飞轮</text>
+      </g>
+    </svg>
+  </div>
+  <p class="callout" data-step="1">站在这个位置上的人，到底要做什么、需要什么能力？</p>
+</section>
+
+<section class="scene statement dark" id="s4-2" data-sec="3" data-beat="3.2" data-title="人人都必须是项目负责人">
+  <h1 class="say"><span class="l1">以后人人都必须是</span><span class="l2"><em>“项目负责人”</em></span></h1>
+  <p class="say-sub">而不再是“基层工程师”</p>
+</section>
+
+<section class="scene" id="s4-3" data-sec="3" data-beat="3.3" data-title="负责人守住三件事"
+  data-heading="负责人守住三件事"
+  data-lede="编辑器退居幕后，查看器、评审与把关走上前台">
+  <div class="cards-3">
+    <div class="card">
+      <span class="tag rnl">关口 1</span>
+      <h3>定需求与拆解</h3>
+      <ul class="points">
+        <li>决定做什么、不做什么</li>
+        <li>拆模块、划接口、分预算</li>
+      </ul>
+    </div>
+    <div class="card" data-step="1">
+      <span class="tag src">关口 2</span>
+      <h3>审意图与方向</h3>
+      <ul class="points">
+        <li>看懂结构与设计折中</li>
+        <li>及时叫停错误路线</li>
+      </ul>
+    </div>
+    <div class="card" data-step="2">
+      <span class="tag lock">关口 3</span>
+      <h3>设门槛与核签</h3>
+      <ul class="points">
+        <li>建独立验证与物理底线</li>
+        <li>为最终结果签字负责</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s4-4" data-sec="3" data-beat="3.4" data-title="正在贬值的技能"
+  data-heading="正在贬值的技能"
+  data-lede="机械性执行正在被 AI 迅速商品化，不再是你的核心壁垒">
+  <div class="grid-2x2">
+    <div class="card soft">
+      <span class="tag lock">贬值 1</span>
+      <h3>狭隘单点的知识深度</h3>
+      <p>死记某一窄方向的局部细枝末节</p>
+    </div>
+    <div class="card soft">
+      <span class="tag lock">贬值 2</span>
+      <h3>手工分析与计算</h3>
+      <p>繁琐公式手推、人肉迭代尺寸</p>
+    </div>
+    <div class="card soft">
+      <span class="tag lock">贬值 3</span>
+      <h3>熟练操作 EDA</h3>
+      <p>背软件快捷键、手工拖拽画图</p>
+    </div>
+    <div class="card soft">
+      <span class="tag lock">贬值 4</span>
+      <h3>单一电路局部优化</h3>
+      <p>长期只死磕某一种电路的手工调参</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s4-5" data-sec="3" data-beat="3.5" data-title="负责人的四类核心能力"
+  data-heading="负责人的四类核心能力"
+  data-lede="AI 越强，下面这四类能力越稀缺、越值钱">
+  <div class="grid-2x2">
+    <div class="card" data-step="1">
+      <h3><span class="tag rnl">1</span>理解与表达</h3>
+      <div class="pair">
+        <span><b>理解能力</b> · 快速抓懂电路结构与证据</span>
+        <span><b>表达能力</b> · 写清规格、约束与审阅意见</span>
+      </div>
+    </div>
+    <div class="card" data-step="2">
+      <h3><span class="tag src">2</span>知识广度与持续学习</h3>
+      <div class="pair">
+        <span><b>广度与融会贯通</b> · 打通硬件、物理、软件与 AI</span>
+        <span><b>快速学习能力</b> · 迅速切入并掌握新领域</span>
+      </div>
+    </div>
+    <div class="card" data-step="3">
+      <h3><span class="tag ok">3</span>洞察与直觉</h3>
+      <div class="pair">
+        <span><b>第一性原理创新</b> · 跳出惯性重新定义问题</span>
+        <span><b>可行性直觉累积</b> · 一眼嗅出极限与风险</span>
+      </div>
+    </div>
+    <div class="card" data-step="4">
+      <h3><span class="tag lock">4</span>统筹与判断</h3>
+      <div class="pair">
+        <span><b>项目管理与调度</b> · 拆任务、调算力与多 Agent</span>
+        <span><b>需求与价值判断</b> · 决定什么值得做、何时够了</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s4-6" data-sec="3" data-beat="3.6" data-title="模拟 IC 理论白学了吗"
+  data-heading="模拟 IC 理论白学了吗">
+  <div class="cmp-2">
+    <div class="card soft">
+      <span class="tag lock">以前 · 当计算器与绘图员</span>
+      <h3>自己算、自己画</h3>
+      <ul class="points">
+        <li>手推复杂公式</li>
+        <li>反复调管子尺寸</li>
+        <li>按固定套路交作业</li>
+      </ul>
+    </div>
+    <div class="card accent-rnl" data-step="1">
+      <span class="tag rnl">现在 · 当负责人的底层雷达</span>
+      <h3>看得懂、判得准</h3>
+      <ul class="points">
+        <li>两秒读懂电路语义</li>
+        <li>摸清物理性能极限</li>
+        <li>嗅出 AI 漏掉的风险</li>
+      </ul>
+    </div>
+  </div>
+  <div class="theory-banner-wrap" data-step="2">
+    <div class="theory-banner">
+      <p>理论没有白学，但运用知识的方式将发生巨变</p>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s5-1" data-sec="3" data-beat="3.7" data-title="怎么才算会用 AI"
+  data-heading="怎么才算“会用 AI”"
+  data-lede="同样开放用 AI 做作业，不同用法差出三个层级">
+  <div class="tiers">
+    <div class="tier l1">
+      <span class="tag lock">Level 1</span>
+      <h3>抽卡代写</h3>
+      <p>丢题面进对话框，出错就催“再改改”</p>
+      <div class="ex">一问三不知，全凭运气</div>
+    </div>
+    <div class="tier l2" data-step="1">
+      <span class="tag src">Level 2</span>
+      <h3>拆解与审稿</h3>
+      <p>给清背景与步骤，看懂方案并精准纠错</p>
+      <div class="ex">能定位错在哪、为什么错</div>
+    </div>
+    <div class="tier l3" data-step="2">
+      <span class="tag rnl">Level 3 · 负责人级</span>
+      <h3>搭环境、设护栏</h3>
+      <ol class="l3-list">
+        <li><b>构建 AI 团队与工作流</b></li>
+        <li><b>构建核签护栏</b></li>
+        <li><b>确定有价值的任务并分配资源</b></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="scene" id="s5-3" data-sec="3" data-beat="3.8" data-title="把作业当负责人演练"
+  data-heading="把作业当负责人演练"
+  data-lede="别把 AI 当代写，把它当成你的工程下属">
+  <div class="flow-4">
+    <div class="step-card">
+      <span class="n">1</span>
+      <h3>定规格</h3>
+      <p>先写清指标，并粗估大致量级</p>
+    </div>
+    <span class="arr">→</span>
+    <div class="step-card" data-step="1">
+      <span class="n">2</span>
+      <h3>看方案</h3>
+      <p>先要设计思路，不收黑盒网表</p>
+    </div>
+    <span class="arr" data-step="1">→</span>
+    <div class="step-card" data-step="2">
+      <span class="n">3</span>
+      <h3>挑毛病</h3>
+      <p>口述原理，主动找两个风险点</p>
+    </div>
+    <span class="arr" data-step="2">→</span>
+    <div class="step-card accent-rnl" data-step="3">
+      <span class="n">4</span>
+      <h3>独立验</h3>
+      <p>核对测试台与边界，过关才签字</p>
+    </div>
+  </div>
+  <p class="callout plain" data-step="3">收获不在交出网表，而在亲手把关每一个关键决定</p>
+</section>
+
+<section class="scene" id="s5-5" data-sec="3" data-beat="3.9" data-title="明天就能开始的四件事"
+  data-heading="明天就能开始的四件事">
+  <ul class="checklist">
+    <li><i>01</i><div><b>启动 Agent 前先写出明确的任务说明</b><span class="ink2">把目标与验收写清，拒绝模糊提问</span></div></li>
+    <li><i>02</i><div><b>把核签落实成明确的规则</b><span class="ink2">用审核过的代码校验每一个仿真结果</span></div></li>
+    <li><i>03</i><div><b>用 Git 管一次电路实验</b><span class="ink2">网表、测试台与结论纯文本化，养成可追溯习惯</span></div></li>
+    <li><i>04</i><div><b>遇烦人流程问第一性原理</b><span class="ink2">别急着忍受低效，想想能否造个小工具交给 AI</span></div></li>
+  </ul>
+</section>
+
+<section class="scene statement dark" id="s6-1" data-sec="3" data-beat="3.10" data-title="收尾金句">
+  <h1 class="say"><span class="l1">AI 时代下，</span><span class="l2">每个人都有一支<em>潜在的 AI 军团</em></span></h1>
+  <p class="say-sub">未来的天花板，取决于<b>你想做什么、能管多大、敢对什么负责</b></p>
+</section>
+
+<section class="scene" id="s6-2" data-sec="3" data-beat="3.11" data-title="Q&A"
+  data-kicker="结语与 Q&amp;A"
+  data-heading="Q&amp;A"
+  data-lede="部分项目仍在持续开发中">
+  <div class="link-grid">
+    <a class="link-card" href="https://analog-design-bench.tokenzhang.com/" target="_blank" rel="noopener">
+      <span class="tag rnl">前端评测</span>
+      <b>Analog Design Bench</b>
+      <span>50 题模拟电路基准</span>
+      <span class="url">analog-design-bench.tokenzhang.com</span>
+    </a>
+    <a class="link-card" href="https://liixtt.github.io/analog-layout-bench/" target="_blank" rel="noopener">
+      <span class="tag rnl">后端评测</span>
+      <b>Analog Layout Bench</b>
+      <span>独立验收版图基准</span>
+      <span class="url">liixtt.github.io/analog-layout-bench</span>
+    </a>
+    <a class="link-card" href="https://rich-netlist.github.io/rnl/" target="_blank" rel="noopener">
+      <span class="tag src">前端源码</span>
+      <b>Rich Netlist (RNL)</b>
+      <span>富语义电路网表</span>
+      <span class="url">rich-netlist.github.io/rnl</span>
+    </a>
+    <a class="link-card" href="https://liixtt.github.io/LayoutML/" target="_blank" rel="noopener">
+      <span class="tag src">后端源码</span>
+      <b>LayoutML</b>
+      <span>语义版图源码平台</span>
+      <span class="url">liixtt.github.io/LayoutML</span>
+    </a>
+    <a class="link-card" href="https://spiceowl-dev.github.io/spiceowl/workflow.html" target="_blank" rel="noopener">
+      <span class="tag lock">仿真管理</span>
+      <b>SpiceOwl</b>
+      <span>Agent 仿真运维诊断</span>
+      <span class="url">spiceowl-dev.github.io/spiceowl</span>
+    </a>
+    <a class="link-card" href="https://true-openaccess.github.io/toa" target="_blank" rel="noopener">
+      <span class="tag ok">开放标准</span>
+      <b>TOA</b>
+      <span>开放电路对象标准</span>
+      <span class="url">true-openaccess.github.io/toa</span>
+    </a>
+    <a class="link-card" href="https://true-openaccess.github.io/gazettoa/" target="_blank" rel="noopener">
+      <span class="tag ok">开源门户</span>
+      <b>Gazettoa</b>
+      <span>芯片库在线浏览器</span>
+      <span class="url">true-openaccess.github.io/gazettoa</span>
+    </a>
+    <a class="link-card" href="https://rich-netlist.github.io/rnl-promo-public/talk/261111-whats-ai-native-analog-ic-design/" target="_blank" rel="noopener">
+      <span class="tag">专题报告</span>
+      <b>AI-Native IC 专题演讲</b>
+      <span>RNL 深入展开版</span>
+      <span class="url">rich-netlist.github.io/rnl-promo-public</span>
+    </a>
+  </div>
+</section>
+
+</main>
+<script src="assets/rnl/figs.js"></script>
+<script src="engine/core.js"></script>
+<script src="talk.js"></script>
+</body>
+</html>
